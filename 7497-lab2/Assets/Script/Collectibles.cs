@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class Collectibles : MonoBehaviour
 {
-    //[SerializeField] private SoCollectible collectibleObject;
-    //[SerializeField] SpriteRenderer spriteranderer;
+    [SerializeField] private SoCollectible collectibleObject;
+    [SerializeField] SpriteRenderer spriteRenderer;
 
     public enum CollectibleType
     {
@@ -17,7 +17,7 @@ public class Collectibles : MonoBehaviour
 
    
     public CollectibleType collectibleType;
-    /*private void Start()
+   /* private void Start()
     {
         Debug.Log(collectibleObject.GetCollectibleType());
     }*/
@@ -41,6 +41,10 @@ public class Collectibles : MonoBehaviour
          }
      }
 
+    /*private void SetOutlineSpriteACtive(bool state)
+    {
+        spriteRenderer.enabled = true;
+    }*/
 
 }
     

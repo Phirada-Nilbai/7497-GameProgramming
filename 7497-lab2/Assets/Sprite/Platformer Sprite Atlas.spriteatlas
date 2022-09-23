@@ -203,6 +203,7 @@ SpriteAtlas:
   - {fileID: 7097352442055866014, guid: 461866db565fa0c42aa5660f6eb08342, type: 3}
   - {fileID: 2943954498268190209, guid: 461866db565fa0c42aa5660f6eb08342, type: 3}
   - {fileID: -4675726891315147460, guid: 461866db565fa0c42aa5660f6eb08342, type: 3}
+  - {fileID: -605177034, guid: e4cf1e6cc738caf408ebd98517ada700, type: 3}
   m_PackedSpriteNamesToIndex:
   - sandCorner_right.png
   - grassCorner_left.png
@@ -367,6 +368,7 @@ SpriteAtlas:
   - alienPink_climb1.png
   - alienGreen_front.png
   - alienPink_walk2.png
+  - platformPack_tilesheet@2_0
   m_RenderDataMap: {}
   m_Tag: Platformer Sprite Atlas
   m_IsVariant: 0

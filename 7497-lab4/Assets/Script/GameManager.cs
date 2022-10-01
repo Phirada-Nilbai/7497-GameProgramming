@@ -8,8 +8,6 @@ using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private LivesTextDisplay livesTextDisplay;
-    [SerializeField] private int lives = 3;
 
     private bool _isGameOver = true;
 
@@ -28,16 +26,10 @@ public class GameManager : MonoBehaviour
         }
     }
 
-    private void Start()
-    {
-        UpdateLives();
-    }
 
 
     public void ProcessPlayerDeath()
     {
-        lives -= 1;
-        UpdateLives();
         RestartScene();
     }
 
@@ -71,13 +63,9 @@ public class GameManager : MonoBehaviour
     {
         return SceneManager.GetActiveScene().buildIndex;
     }
-    public void PlayGame()
+    public void PlayGame(int bulidIndex)
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
+        LoadScene(bulidIndex);
     }
 
-    public void UpdateLives()
-    {
-        livesTextDisplay.UpdateLives(lives);
-    }
 }

@@ -9,12 +9,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private PlayerAnimatorController animatorController;
+    [SerializeField] private LivesTextDisplay livesTextDisplay;
 
     [Header("Player Values")]
     [SerializeField] private float movementSpeed = 3f;
     [SerializeField] private float jumpForce = 8f;
     [SerializeField] private float timeBetweenJumps = 0.1f;
     [SerializeField] private float coyoteTimeDuration = 0.5f;
+    [SerializeField] private int lives = 3;
 
     [Header("Ground Checks")]
     [SerializeField] private LayerMask groundLayers;
@@ -36,6 +38,7 @@ public class PlayerController : MonoBehaviour
 
     private void Start()
     {
+        UpdateLives();
         _gameManager = FindObjectOfType<GameManager>();
     }
     private void Update()
@@ -134,6 +137,10 @@ public class PlayerController : MonoBehaviour
     public void TakeDamage()
     {
         _gameManager.ProcessPlayerDeath();
+    }
+    private void UpdateLives()
+    {
+        livesTextDisplay.UpdateLives(lives);
     }
 
     #endregion

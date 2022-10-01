@@ -512,7 +512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.6994243, y: -1.97, z: -10}
+  m_LocalPosition: {x: -2.7027812, y: -1.97, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -9077,7 +9077,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1710374368}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.6994243, y: -1.97, z: -10}
+  m_LocalPosition: {x: -2.7027812, y: -1.97, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -9120,10 +9120,12 @@ MonoBehaviour:
   rb: {fileID: 1389715780}
   playerCollider: {fileID: 1389715779}
   animatorController: {fileID: 2122948551}
+  livesTextDisplay: {fileID: 404579971}
   movementSpeed: 3
   jumpForce: 10
   timeBetweenJumps: 0.1
   coyoteTimeDuration: 0.5
+  lives: 3
   groundLayers:
     serializedVersion: 2
     m_Bits: 8

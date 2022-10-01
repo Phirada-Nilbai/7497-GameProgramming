@@ -1,0 +1,18 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b02c5cc1b13224c4789bda235655d2fb, type: 3}
+  m_Name: Double Jump
+  m_EditorClassIdentifier: 
+  collectibleType: 3
+  sprite: {fileID: 845586310, guid: ba09ad51b185f304b8a59acd8dcba78b, type: 3}
+  outlineSprite: {fileID: 946304810, guid: ba09ad51b185f304b8a59acd8dcba78b, type: 3}
+  respawnable: 0

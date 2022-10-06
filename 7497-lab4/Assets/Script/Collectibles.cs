@@ -9,6 +9,7 @@ public class Collectibles : MonoBehaviour
     [SerializeField] private float tweenDuration = 5f;
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private SoCollectibles collectibleObject;
+    [SerializeField] private AudioSource audioSource;
 
     private CollectibleType _collectibleType;
     private bool _isRespawnable;
@@ -22,6 +23,7 @@ public class Collectibles : MonoBehaviour
     public CollectibleType GetCollectibleInfoOnContact()
     {
         gameObject.SetActive(false);
+        audioSource.Play();
 
         if (_isRespawnable)
         {

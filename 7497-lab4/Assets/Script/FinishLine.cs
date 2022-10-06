@@ -8,7 +8,6 @@ public class FinishLine : MonoBehaviour
     private GameManager _gameManager;
 
     private bool _triggeredNextScene;
-    private float _nextSceneTime = 0.15f;
 
 
   

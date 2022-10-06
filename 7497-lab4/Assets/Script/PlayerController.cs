@@ -129,7 +129,7 @@ public class PlayerController : MonoBehaviour
 
     private void SetAnimatorParameters()
     {
-        animatorController.SetAnimatorParameter(rb.velocity, _isGrounded);
+        animatorController.SetAnimatorParameters(rb.velocity, _isGrounded);
     }
 
     public void EnableDoubleJump()

@@ -15,4 +15,4 @@ MonoBehaviour:
   collectibleType: 3
   sprite: {fileID: 845586310, guid: ba09ad51b185f304b8a59acd8dcba78b, type: 3}
   outlineSprite: {fileID: 946304810, guid: ba09ad51b185f304b8a59acd8dcba78b, type: 3}
-  respawnable: 0
+  respawnable: 1

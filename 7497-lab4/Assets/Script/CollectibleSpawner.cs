@@ -7,8 +7,10 @@ public class CollectibleSpawner : MonoBehaviour
     [SerializeField] private SpriteRenderer spriteRenderer;
     [SerializeField] private GameObject collectibleGameObject;
 
+
     [Header("Collectible Settings")]
     [SerializeField] private float respawnTime = 4f;
+    [SerializeField] AudioSource RespawnAudioSource;
 
     private void Start()
     {
@@ -20,6 +22,7 @@ public class CollectibleSpawner : MonoBehaviour
         yield return new WaitForSeconds(respawnTime);
         SetOutlineSpriteActive(false);
         collectibleGameObject.SetActive(true);
+        RespawnAudioSource.Play();
     }
 
     private void SetOutlineSpriteActive(bool state)

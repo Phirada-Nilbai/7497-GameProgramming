@@ -10,4 +10,9 @@ public class PlayAnimationEvents : MonoBehaviour
     {
         audioController.PlayWalkSound();
     }
+
+    public void PlayFallSound()
+    {
+        audioController.PlatFallSound();
+    }
 }

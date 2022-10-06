@@ -1,4 +1,5 @@
 using DG.Tweening;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -57,8 +58,9 @@ public class GameManager : MonoBehaviour
             nextSceneIndex = 1;
         }
 
-        LoadScene(nextSceneIndex);
-    }
+        //yield return new WaitForSeconds(0.15f);
+        LoadScene(nextSceneIndex);   
+        }
 
     private int GetCurrentBuildIndex()
     {

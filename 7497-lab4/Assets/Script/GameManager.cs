@@ -1,22 +1,17 @@
 using DG.Tweening;
-using System.Collections;
-using Unity.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.SocialPlatforms.Impl;
-using UnityEngine.UIElements;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private UIManager uiManager;
+    [SerializeField] private int playerLives = 3;
 
-    private bool _isGameOver = true;
-
-  
     private void Awake()
     {
-        var numGameManagers = FindObjectsOfType<GameManager>().Length;
+        var numGameManager = FindObjectsOfType<GameManager>().Length;
 
-        if (numGameManagers > 1)
+        if (numGameManager > 1)
         {
             Destroy(gameObject);
         }
@@ -26,46 +21,58 @@ public class GameManager : MonoBehaviour
         }
     }
 
-
+    private void Start()
+    {
+        UpdateLives();
+    }
 
     public void ProcessPlayerDeath()
     {
-        RestartScene();
-    }
+        playerLives--;
 
-    public void RestartScene()
-    {
-        SceneManager.LoadScene(GetCurrentSceneIndex());
-    }
-    
-    public void LoadScene(int bulidIndex)
-    {
-        SceneManager.LoadScene(bulidIndex);
-        DOTween.KillAll();
-    }
-    public void TriggerNextScene()
-    {
-        StartCoroutine(LoadNextSecne());
-    }
-
-    private IEnumerator LoadNextSecne()
-    {
-        var nextSceneBulidIndex = GetCurrentSceneIndex() + 1;
-        if (nextSceneBulidIndex == SceneManager.sceneCountInBuildSettings)
+        switch (playerLives)
         {
-            nextSceneBulidIndex = 0;
+            case >= 1:
+                LoadScene(GetCurrentBuildIndex());
+                UpdateLives();
+                break;
+            default:
+                ReturnToMainMenu();
+                break;
+        }
+    }
+
+    public void ReturnToMainMenu()
+    {
+        LoadScene(0);
+        Destroy(gameObject);
+    }
+
+    public void LoadNextLevel()
+    {
+        var nextSceneIndex = GetCurrentBuildIndex() + 1;
+
+        if (nextSceneIndex == SceneManager.sceneCountInBuildSettings)
+        {
+            nextSceneIndex = 1;
         }
 
-        yield return new WaitForSeconds(0.15f);
-        SceneManager.LoadScene(nextSceneBulidIndex);
+        LoadScene(nextSceneIndex);
     }
-    private int GetCurrentSceneIndex()
+
+    private int GetCurrentBuildIndex()
     {
         return SceneManager.GetActiveScene().buildIndex;
     }
-    public void PlayGame(int bulidIndex)
+
+    private void LoadScene(int buildIndex)
     {
-        LoadScene(bulidIndex);
+        SceneManager.LoadScene(buildIndex);
+        DOTween.KillAll();
     }
 
+    private void UpdateLives()
+    {
+        uiManager.UpdateLives(playerLives);
+    }
 }

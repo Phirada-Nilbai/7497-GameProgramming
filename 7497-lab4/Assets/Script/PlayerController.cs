@@ -1,4 +1,4 @@
-using DG.Tweening.Core.Easing;
+using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,38 +9,33 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private Rigidbody2D rb;
     [SerializeField] private Collider2D playerCollider;
     [SerializeField] private PlayerAnimatorController animatorController;
-    [SerializeField] private LivesTextDisplay livesTextDisplay;
+    [SerializeField] private PlayerAudioController audioController;
 
     [Header("Player Values")]
     [SerializeField] private float movementSpeed = 3f;
-    [SerializeField] private float jumpForce = 8f;
+    [SerializeField] private float jumpForce = 10f;
     [SerializeField] private float timeBetweenJumps = 0.1f;
     [SerializeField] private float coyoteTimeDuration = 0.5f;
-    [SerializeField] private int lives = 3;
 
     [Header("Ground Checks")]
     [SerializeField] private LayerMask groundLayers;
     [SerializeField] private float extraGroundCheckDistance = 0.5f;
 
+    // Input Values
     private float _moveInput;
 
- 
+    // Boolean flags. Booleans for checking conditions.
     private bool _isGrounded;
     private bool _canJump;
     private bool _canDoubleJump;
 
-
+    // Private variables
     private float _coyoteTimeTimer;
     private float _lastJumpTimer;
-   
 
+    // Stored References
     private GameManager _gameManager;
 
-    private void Start()
-    {
-        UpdateLives();
-        _gameManager = FindObjectOfType<GameManager>();
-    }
     private void Update()
     {
         CheckGround();
@@ -51,6 +46,13 @@ public class PlayerController : MonoBehaviour
     private void FixedUpdate()
     {
         Move();
+    }
+
+    private void FindGameManager()
+    {
+        if (_gameManager != null) return;
+
+        _gameManager = FindObjectOfType<GameManager>();
     }
 
     #region Actions
@@ -72,20 +74,21 @@ public class PlayerController : MonoBehaviour
 
     private void TryJumping()
     {
-        if (_lastJumpTimer <= timeBetweenJumps) return; 
+        if (_lastJumpTimer <= timeBetweenJumps) return;
 
-        if (!_canJump) 
+        if (!_canJump)
         {
             if (!_canDoubleJump) return; 
-            _canDoubleJump = false;
+            _canDoubleJump = false; 
         }
 
         Jump(jumpForce);
+        audioController.PlayJumpSound();
     }
 
     public void Jump(float force, float additionalTimeWait = 0f)
     {
-        _canJump = false;
+        _canJump = false; 
         _lastJumpTimer = 0f - additionalTimeWait;
         rb.velocity = new Vector2(rb.velocity.x, 0f); 
         rb.AddForce(force * transform.up, ForceMode2D.Impulse);
@@ -136,18 +139,16 @@ public class PlayerController : MonoBehaviour
 
     public void TakeDamage()
     {
+        FindGameManager();
         _gameManager.ProcessPlayerDeath();
-    }
-    private void UpdateLives()
-    {
-        livesTextDisplay.UpdateLives(lives);
+        audioController.PlayDeadSound();
+
     }
 
     #endregion
 
-
-
     #region Input
+
     private void OnMove(InputValue value)
     {
         _moveInput = value.Get<float>();
@@ -160,11 +161,14 @@ public class PlayerController : MonoBehaviour
         if (!value.isPressed) return;
 
         TryJumping();
-        
     }
+
     private void OnQuit(InputValue value)
     {
-        Destroy(_gameManager);
+        FindGameManager();
+        _gameManager.ReturnToMainMenu();
     }
+
     #endregion
+
 }

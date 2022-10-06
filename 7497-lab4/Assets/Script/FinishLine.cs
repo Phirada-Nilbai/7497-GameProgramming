@@ -1,23 +1,26 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+
 public class FinishLine : MonoBehaviour
 {
+    [SerializeField] private AudioSource audioSource;
+    private const string PlayerTag = "Player";
+
     private GameManager _gameManager;
 
+    private bool _triggeredNextScene;
+    private float _nextSceneTime = 0.15f;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+
+  
+    private void OnTriggerEnter2D(Collider2D col)
     {
-        if (!collision.CompareTag("Player")) return;
+        if (!col.CompareTag(PlayerTag)) return;
 
-        if(_gameManager == null)
-        {
-            _gameManager = FindObjectOfType<GameManager>();
-        }
+        if (_triggeredNextScene) return;
 
-        _gameManager.TriggerNextScene();
+        _triggeredNextScene = true;  
+        _gameManager = FindObjectOfType<GameManager>();
+        _gameManager.LoadNextLevel();
+        audioSource.Play();
     }
-
 }
